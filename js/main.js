@@ -237,7 +237,7 @@
       filters = ["All"].concat(discovered);
 
       renderSchemes();
-      renderFilterBar();
+      renderFilters();
       document.dispatchEvent(new CustomEvent("schemes-ready", { detail: schemes }));
     } catch (error) {
       console.error("Failed to load schemes", error);
