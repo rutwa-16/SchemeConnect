@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | SchemeConnect</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+</head>
+<body>
+  <div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
+
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-glow"></div>
+    <div class="loading-center">
+      <div class="loading-logo">&#127811;</div>
+      <h1>SchemeConnect</h1>
+      <p>AI-Powered Government Schemes</p>
+      <div class="loading-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="scroll-progress"></div>
+
+  <header id="main-header">
+    <div class="container nav-shell" id="nav-shell">
+      <a href="#" class="brand">
+        <span class="brand-icon">&#127811;</span>
+        <span class="brand-name">SchemeConnect</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="#">Home</a>
+        <a href="pages/schemes.html">Schemes</a>
+        <a href="pages/chat.html">AI Assistant</a>
+        <a href="pages/quiz.html">Eligibility Quiz</a>
+        <a href="pages/about.html">About</a>
+        <a class="sign-in" href="pages/signin.html">Sign In</a>
+      </nav>
+
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#">Home</a>
+    <a href="pages/schemes.html">Schemes</a>
+    <a href="pages/chat.html">AI Assistant</a>
+    <a href="pages/quiz.html">Eligibility Quiz</a>
+    <a href="pages/about.html">About</a>
+    <a class="sign-in" href="pages/signin.html">Sign In</a>
+  </div>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="hero-bg"></div>
+      <div class="container hero-grid">
+        <div class="hero-left reveal">
+          <div class="hero-badge">&#10024; AI-Powered Scheme Discovery · 500+ Programs</div>
+          <h2>
+            Discover the<br />
+            Right <span>Government<br />Scheme</span> for<br />
+            You.
+          </h2>
+          <p>
+            Navigate hundreds of government programs effortlessly. Our AI assistant matches your profile with the perfect schemes,
+            grants, and subsidies in seconds.
+          </p>
+          <div class="hero-actions">
+            <button id="explore-btn" class="btn-primary">Explore Schemes</button>
+            <button id="open-ai-btn" class="btn-secondary">Try AI Assistant</button>
+          </div>
+          <div class="hero-quick-links">
+            <a class="quick-link-card" href="pages/chat.html" aria-label="Open full AI chat page">
+              <span class="quick-link-icon">💬</span>
+              <span class="quick-link-copy">
+                <strong>Open Full Chat</strong>
+                <small id="chat-quick-status">Ask anything about schemes</small>
+              </span>
+              <span class="quick-link-arrow">→</span>
+            </a>
+            <a class="quick-link-card" href="pages/quiz.html" aria-label="Open eligibility quiz page">
+              <span class="quick-link-icon">🧩</span>
+              <span class="quick-link-copy">
+                <strong>Take Eligibility Quiz</strong>
+                <small id="quiz-quick-status">Get matched schemes in 2 minutes</small>
+              </span>
+              <span class="quick-link-arrow">→</span>
+            </a>
+          </div>
+          <div class="hero-trust">
+            <span>Government Verified</span>
+            <span>Updated Daily</span>
+            <span>AI-Powered</span>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="floating-card main-card">
+            <div class="card-header">
+              <span class="emoji">&#128218;</span>
+              <div>
+                <h3>National Scholarship</h3>
+                <small>Students · All India</small>
+              </div>
+              <span class="tag">Active</span>
+            </div>
+            <div class="score-row">
+              <span>Benefit</span>
+              <strong>Up to Rs 2 Lakh/yr</strong>
+            </div>
+            <div class="progress"><span></span></div>
+            <div class="score-row">
+              <span>AI Match Score</span>
+              <strong>95% · Excellent</strong>
+            </div>
+          </div>
+
+          <div class="floating-card top-right-card">
+            <div class="card-header">
+              <span class="emoji">&#127806;</span>
+              <div>
+                <h3>PM Kisan Yojana</h3>
+                <small><span class="verified-dot"></span>Verified Program</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-card bottom-left-card">
+            <div class="women-top-row">
+              <div class="avatars-group">
+                <span class="avatar">&#129489;</span>
+                <span class="avatar">&#128105;</span>
+                <span class="avatar">&#128105;&#8205;&#128188;</span>
+              </div>
+              <span class="women-tag">Women</span>
+            </div>
+            <p class="women-text"><span class="highlight">1M+</span> women benefited this year across India</p>
+          </div>
+
+          <div class="floating-card stats-pill">
+            <div class="pill-text">
+              <div class="pill-number">500+</div>
+              <div class="pill-label">Schemes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-wrap reveal" id="stats-wrap">
+      <div class="container stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">&#10022;</div>
+          <h3 class="counter" data-target="500" data-suffix="+">0</h3>
+          <p>Active Schemes</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">&#128101;</div>
+          <h3 class="counter" data-target="50" data-suffix="Cr+">0</h3>
+          <p>Crore Beneficiaries</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">&#128506;</div>
+          <h3 class="counter" data-target="28" data-suffix="">0</h3>
+          <p>States Covered</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">&#9889;</div>
+          <h3 class="counter" data-target="15" data-suffix="+">0</h3>
+          <p>Categories</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="schemes reveal" id="schemes">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Featured Programs</span>
+          <h2>Government Schemes <span>Built for You</span></h2>
+          <p>Curated from 500+ active programs. Hover any card to explore details, then let our AI find your perfect match.</p>
+        </div>
+
+        <div class="smart-tools" id="smart-tools">
+          <div id="best-match-badge" class="best-match-badge" aria-live="polite"></div>
+          <div class="scheme-search-wrap">
+            <input id="scheme-search" type="text" placeholder="Search schemes by name, category, or benefit..." aria-label="Search schemes" />
+            <button id="voice-search-btn" type="button" aria-label="Voice search">🎤 Voice</button>
+          </div>
+          <div class="smart-extra-controls">
+            <button id="command-palette-btn" class="smart-chip" type="button" aria-label="Open quick actions">⚡ Quick Actions</button>
+            <button id="focus-mode-btn" class="smart-chip" type="button" aria-pressed="false">⦿ Focus Mode</button>
+            <button id="shortcut-hint-btn" class="smart-chip" type="button" aria-label="Open keyboard shortcuts">⌘K / ? Shortcuts</button>
+          </div>
+        </div>
+
+        <div id="filter-bar" class="filter-bar"></div>
+        <div id="schemes-grid" class="schemes-grid"></div>
+
+        <div class="cta-row">
+          <button id="surprise-btn" class="btn-secondary">Surprise Me</button>
+          <button id="shuffle-btn" class="btn-secondary">Shuffle Cards</button>
+          <a id="view-all-btn" class="btn-ghost" href="pages/schemes.html">View All 500+ Schemes &#8594;</a>
+        </div>
+
+        <div id="surprise-card" class="surprise-card" aria-live="polite"></div>
+        <div id="compare-panel" class="compare-panel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="benefits reveal" id="benefits">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Why Choose Us</span>
+          <h2>Benefits You Can <span>Trust</span></h2>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">🎯</div>
+            <h3>AI-Powered Matching</h3>
+            <p>Smart algorithms find schemes perfectly aligned with your profile in seconds.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">✅</div>
+            <h3>Government Verified</h3>
+            <p>All schemes sourced directly from official government portals and databases.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">⚡</div>
+            <h3>Daily Updates</h3>
+            <p>Real-time information on new schemes, eligibility changes, and deadlines.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">📱</div>
+            <h3>Easy Access</h3>
+            <p>Simple, intuitive interface optimized for all devices and skill levels.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="success-stories reveal" id="stories">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Success Stories</span>
+          <h2>Real Impact, <span>Real Lives</span></h2>
+        </div>
+        <div class="stories-grid">
+          <div class="story-card">
+            <div class="story-header">
+              <div class="story-avatar">👨‍🎓</div>
+              <div>
+                <h4>Harsh Gurjar</h4>
+                <p class="story-role">Student from Delhi</p>
+              </div>
+            </div>
+            <p class="story-text">"Found ₹2 lakh scholarship in just 2 minutes! SchemeConnect saved me months of research."</p>
+            <div class="story-badge">National Scholarship</div>
+          </div>
+          <div class="story-card">
+            <div class="story-header">
+              <div class="story-avatar">👩‍🌾</div>
+              <div>
+                <h4>Renuka Kulkarni</h4>
+                <p class="story-role">Farmer from MP</p>
+              </div>
+            </div>
+            <p class="story-text">"Matched with 3 agricultural schemes. Got government support I didn't know existed."</p>
+            <div class="story-badge">PM Kisan Yojana</div>
+          </div>
+          <div class="story-card">
+            <div class="story-header">
+              <div class="story-avatar">👩‍💼</div>
+              <div>
+                <h4>Pramit Rokhade</h4>
+                <p class="story-role">Entrepreneur from Mumbai</p>
+              </div>
+            </div>
+            <p class="story-text">"Discovered startup funding programs. Already secured ₹50 lakh in grants!"</p>
+            <div class="story-badge">Startup Scheme</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <span class="brand-icon">&#127811;</span>
+        <div>
+          <strong>SchemeConnect</strong>
+          <small>AI-Powered Government Discovery</small>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="pages/privacy.html">Privacy Policy</a>
+        <a href="pages/terms.html">Terms of Service</a>
+        <a href="pages/contact.html">Contact Us</a>
+        <a href="pages/official-portal.html">Official Portal</a>
+      </div>
+      <div class="footer-love">Made with &#10084; for India</div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&#169; 2026 SchemeConnect. All rights reserved.</span>
+      <span>Data sourced from official government portals</span>
+    </div>
+  </footer>
+
+  <section id="ai-assistant" class="ai-wrapper">
+    <button id="ai-fab" class="ai-fab" aria-label="Open AI Assistant">&#128172;</button>
+    <div id="ai-panel" class="ai-panel">
+      <div class="ai-head">
+        <div>
+          <h3>AI Scheme Advisor</h3>
+          <p><span class="dot"></span> Online</p>
+        </div>
+        <button id="ai-close" aria-label="Close">&#10005;</button>
+      </div>
+      <div id="ai-messages" class="ai-messages"></div>
+      <div id="ai-suggestions" class="ai-suggestions"></div>
+      <form id="ai-form" class="ai-form">
+        <input id="ai-input" type="text" placeholder="Ask about any scheme..." />
+        <button type="submit">&#10148;</button>
+      </form>
+      <p class="ai-note">AI can make mistakes. Verify scheme details officially.</p>
+    </div>
+  </section>
+
+  <div class="style-dock" id="style-dock">
+    <button class="style-chip active" data-theme="mint" type="button">Mint Glass</button>
+    <button class="style-chip" data-theme="aurora" type="button">Aurora Pop</button>
+    <button class="style-chip" data-theme="sunset" type="button">Sunset Glow</button>
+    <button class="style-chip" data-theme="ocean" type="button">Ocean Blue</button>
+    <button class="style-chip" data-theme="forest" type="button">Forest Green</button>
+  </div>
+
+  <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">&#8593;</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="data/schemes.js"></script>
+  <script src="js/custom-schemes.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/enhancements.js"></script>  <script src="js/premium-3d-stage.js"></script></body>
+</html>

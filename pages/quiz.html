@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eligibility Quiz | SchemeConnect</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/enhancements.css" />
+  <link rel="stylesheet" href="../css/scroll-to-top.css" />
+  <link rel="stylesheet" href="../css/quiz-page.css" />
+</head>
+<body class="quiz-page">
+  <header id="main-header">
+    <div class="container nav-shell" id="nav-shell">
+      <a href="../index.html" class="brand">
+        <span class="brand-icon">&#127811;</span>
+        <span class="brand-name">SchemeConnect</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="../index.html">Home</a>
+        <a href="schemes.html">Schemes</a>
+        <a href="chat.html">AI Assistant</a>
+        <a class="active-link" href="quiz.html">Eligibility Quiz</a>
+        <a href="about.html">About</a>
+        <a class="sign-in" href="signin.html">Sign In</a>
+      </nav>
+
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="schemes.html">Schemes</a>
+    <a href="chat.html">AI Assistant</a>
+    <a class="active-link" href="quiz.html">Eligibility Quiz</a>
+    <a href="about.html">About</a>
+    <a class="sign-in" href="signin.html">Sign In</a>
+  </div>
+
+  <main>
+    <section class="quiz-shell">
+      <div class="quiz-hero">
+        <div class="hero-tag">✦ 5 Questions • 2 Minutes</div>
+        <h1>Find Your <span class="g">Matched Schemes</span></h1>
+        <p>Answer a few quick questions and get a personalized list of government schemes you may qualify for.</p>
+        <div class="hero-stats">
+          <div class="hs"><strong>500+</strong><span>Schemes</span></div>
+          <div class="hs"><strong>28+</strong><span>States</span></div>
+          <div class="hs"><strong>100%</strong><span>Free</span></div>
+        </div>
+        <div class="quiz-hero-actions">
+          <button id="clear-progress-btn" class="btn-bk" type="button">Clear Saved Progress</button>
+        </div>
+      </div>
+
+      <div class="prog-wrap" id="prog-wrap">
+        <div class="dots-row">
+          <div class="sdot active" id="dot-1">1</div>
+          <div class="sline" id="line-1"></div>
+          <div class="sdot" id="dot-2">2</div>
+          <div class="sline" id="line-2"></div>
+          <div class="sdot" id="dot-3">3</div>
+          <div class="sline" id="line-3"></div>
+          <div class="sdot" id="dot-4">4</div>
+          <div class="sline" id="line-4"></div>
+          <div class="sdot" id="dot-5">5</div>
+        </div>
+        <div class="pbar-wrap">
+          <div class="pbar-track"><div class="pbar-fill" id="pbar" style="width:20%"></div></div>
+          <div class="pbar-label" id="plabel">Step 1 of 5</div>
+        </div>
+      </div>
+
+      <div id="quiz-sec">
+        <div class="quiz-card">
+          <div class="quiz-step active" id="step-1">
+            <div class="step-tag">Step 1 - Location</div>
+            <div class="step-q">Which state are you from?</div>
+            <div class="step-hint">We'll include both central and state-specific schemes for your region.</div>
+            <select class="sc-inp" id="q-state">
+              <option value="">- Select your state / UT -</option>
+              <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+              <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
+              <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+              <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+              <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+              <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+              <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+              <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+              <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+              <option>West Bengal</option><option>Delhi</option><option>Jammu &amp; Kashmir</option>
+              <option>Ladakh</option><option>Chandigarh</option><option>Puducherry</option>
+            </select>
+            <div class="errmsg" id="err-1">Please select your state.</div>
+          </div>
+
+          <div class="quiz-step" id="step-2">
+            <div class="step-tag">Step 2 - Age</div>
+            <div class="step-q">How old are you?</div>
+            <div class="step-hint">Age helps map youth, general, and senior-citizen schemes.</div>
+            <input type="number" class="sc-inp" id="q-age" placeholder="Enter your age (e.g. 24)" min="1" max="120" />
+            <div class="errmsg" id="err-2">Please enter a valid age (1-120).</div>
+          </div>
+
+          <div class="quiz-step" id="step-3">
+            <div class="step-tag">Step 3 - Gender</div>
+            <div class="step-q">What is your gender?</div>
+            <div class="step-hint">Some schemes are targeted to specific demographics.</div>
+            <div class="opts">
+              <button class="ob" data-q="gender" data-val="male"><span class="oi">👨</span>Male<span class="ock">✓</span></button>
+              <button class="ob" data-q="gender" data-val="female"><span class="oi">👩</span>Female<span class="ock">✓</span></button>
+              <button class="ob" data-q="gender" data-val="transgender"><span class="oi">🏳️‍🌈</span>Transgender<span class="ock">✓</span></button>
+              <button class="ob" data-q="gender" data-val="prefer_not"><span class="oi">🤐</span>Prefer not to say<span class="ock">✓</span></button>
+            </div>
+            <div class="errmsg" id="err-3">Please select an option.</div>
+          </div>
+
+          <div class="quiz-step" id="step-4">
+            <div class="step-tag">Step 4 - Income</div>
+            <div class="step-q">Annual household income?</div>
+            <div class="step-hint">Used for BPL, EWS, and income-based filters.</div>
+            <div class="opts">
+              <button class="ob" data-q="income" data-val="below_1L"><span class="oi">💸</span>Below Rs 1 Lakh<span class="ock">✓</span></button>
+              <button class="ob" data-q="income" data-val="1_3L"><span class="oi">💰</span>Rs 1L - Rs 3L<span class="ock">✓</span></button>
+              <button class="ob" data-q="income" data-val="3_8L"><span class="oi">💵</span>Rs 3L - Rs 8L<span class="ock">✓</span></button>
+              <button class="ob" data-q="income" data-val="above_8L"><span class="oi">🏦</span>Above Rs 8L<span class="ock">✓</span></button>
+            </div>
+            <div class="errmsg" id="err-4">Please select your income range.</div>
+          </div>
+
+          <div class="quiz-step" id="step-5">
+            <div class="step-tag">Step 5 - Category</div>
+            <div class="step-q">Which category describes you?</div>
+            <div class="step-hint">Select all that apply for better matching.</div>
+            <div class="opts">
+              <button class="ob" data-q="category" data-val="farmer"><span class="oi">🌾</span>Farmer<span class="ock">✓</span></button>
+              <button class="ob" data-q="category" data-val="student"><span class="oi">🎓</span>Student<span class="ock">✓</span></button>
+              <button class="ob" data-q="category" data-val="woman"><span class="oi">👩‍💼</span>Woman Entrepreneur<span class="ock">✓</span></button>
+              <button class="ob" data-q="category" data-val="msme"><span class="oi">🏭</span>MSME / Business<span class="ock">✓</span></button>
+              <button class="ob" data-q="category" data-val="senior_citizen"><span class="oi">👴</span>Senior Citizen<span class="ock">✓</span></button>
+              <button class="ob" data-q="category" data-val="differently_abled"><span class="oi">♿</span>Differently Abled<span class="ock">✓</span></button>
+            </div>
+            <div class="errmsg" id="err-5">Please select at least one category.</div>
+          </div>
+
+          <div class="qfooter">
+            <button class="btn-bk" id="btn-bk" style="visibility:hidden">← Back</button>
+            <button class="btn-nx" id="btn-nx">Next Step →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="results-sec">
+        <div class="quiz-card">
+          <div class="rh">
+            <span class="r-trophy">🎯</span>
+            <h2>Your Matched Schemes</h2>
+            <p id="r-sub">Analyzing your profile...</p>
+          </div>
+          <div class="r-chips" id="r-chips"></div>
+          <div class="r-list" id="r-list"></div>
+          <div class="quiz-result-actions">
+            <button class="btn-bk" id="btn-share" type="button">Share Results</button>
+            <a class="btn-bk" id="btn-open-home" href="../index.html#schemes">Open Home Saved</a>
+          </div>
+          <button class="btn-retake" id="btn-retake">↩ Retake Quiz</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <span class="brand-icon">&#127811;</span>
+        <div>
+          <strong>SchemeConnect</strong>
+          <small>AI-Powered Government Discovery</small>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="official-portal.html">Official Portal</a>
+      </div>
+      <div class="footer-love">Made with &#10084; for India</div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&#169; 2026 SchemeConnect. All rights reserved.</span>
+      <span>Data sourced from official government portals</span>
+    </div>
+  </footer>
+
+  <div class="style-dock" id="style-dock">
+    <button class="style-chip active" data-theme="mint" type="button">Mint Glass</button>
+    <button class="style-chip" data-theme="aurora" type="button">Aurora Pop</button>
+    <button class="style-chip" data-theme="sunset" type="button">Sunset Glow</button>
+    <button class="style-chip" data-theme="ocean" type="button">Ocean Blue</button>
+    <button class="style-chip" data-theme="forest" type="button">Forest Green</button>
+  </div>
+
+  <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">&#8593;</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../js/page-theme.js"></script>
+  <script src="../js/enhancements.js"></script>
+  <script src="../js/premium-3d-stage.js"></script>
+  <script>
+    $(function () {
+      const FAVORITES_KEY = "schemeconnect:favorites";
+      const LEGACY_QUIZ_FAVORITES_KEY = "sc_saved_schemes";
+      const QUIZ_PROGRESS_KEY = "schemeconnect:quiz-progress";
+      const a = { state: "", age: null, gender: "", income: "", categories: [] };
+      let s = 1;
+      const T = 5;
+      let lastResults = [];
+
+      function showToast(message) {
+        const toast = $('<div class="quiz-toast" role="status" aria-live="polite"></div>').text(message);
+        $("body").append(toast);
+        window.setTimeout(function () {
+          toast.fadeOut(200, function () { toast.remove(); });
+        }, 1700);
+      }
+
+      function normalizeFavoriteItem(item) {
+        if (!item || typeof item !== "object") return null;
+        const id = String(item.id || item.name || "").trim();
+        const name = String(item.name || item.id || "Unnamed Scheme").trim();
+        if (!name) return null;
+        return {
+          id: id || name,
+          name: name,
+          category: String(item.category || "General"),
+          benefit: String(item.benefit || item.benefits || "Benefit details available"),
+          description: String(item.description || ""),
+          href: String(item.href || ("schemes.html?scheme=" + encodeURIComponent(id || name))),
+          savedFrom: item.savedFrom || "quiz"
+        };
+      }
+
+      function readFavorites() {
+        let shared = [];
+        let legacy = [];
+        try {
+          shared = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+        } catch (e) {
+          shared = [];
+        }
+        try {
+          legacy = JSON.parse(localStorage.getItem(LEGACY_QUIZ_FAVORITES_KEY) || "[]");
+        } catch (e) {
+          legacy = [];
+        }
+
+        const merged = [].concat(shared, legacy).map(normalizeFavoriteItem).filter(Boolean);
+        const seen = new Map();
+        merged.forEach(function (item) {
+          const key = String(item.id || item.name).toLowerCase();
+          if (!seen.has(key)) seen.set(key, item);
+        });
+        const out = Array.from(seen.values()).slice(0, 30);
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(out));
+        if (legacy.length) localStorage.removeItem(LEGACY_QUIZ_FAVORITES_KEY);
+        return out;
+      }
+
+      function writeFavorites(list) {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(list));
+        localStorage.removeItem(LEGACY_QUIZ_FAVORITES_KEY);
+        document.dispatchEvent(new CustomEvent("schemeconnect:favorites-updated", { detail: list.slice() }));
+      }
+
+      function saveQuizProgress() {
+        const payload = {
+          step: s,
+          answers: {
+            state: a.state,
+            age: a.age,
+            gender: a.gender,
+            income: a.income,
+            categories: a.categories.slice()
+          },
+          updatedAt: Date.now()
+        };
+        localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify(payload));
+      }
+
+      function clearQuizProgress() {
+        localStorage.removeItem(QUIZ_PROGRESS_KEY);
+      }
+
+      function syncUiFromAnswers() {
+        $("#q-state").val(a.state || "");
+        $("#q-age").val(a.age != null ? a.age : "");
+
+        $("[data-q='gender']").removeClass("selected");
+        if (a.gender) {
+          $("[data-q='gender'][data-val='" + a.gender + "']").addClass("selected");
+        }
+
+        $("[data-q='income']").removeClass("selected");
+        if (a.income) {
+          $("[data-q='income'][data-val='" + a.income + "']").addClass("selected");
+        }
+
+        $("[data-q='category']").removeClass("selected");
+        (a.categories || []).forEach(function (c) {
+          $("[data-q='category'][data-val='" + c + "']").addClass("selected");
+        });
+      }
+
+      function restoreQuizProgress() {
+        let payload = null;
+        try {
+          payload = JSON.parse(localStorage.getItem(QUIZ_PROGRESS_KEY) || "null");
+        } catch (e) {
+          payload = null;
+        }
+        if (!payload || !payload.answers) return;
+
+        const isStale = Date.now() - Number(payload.updatedAt || 0) > 1000 * 60 * 60 * 24 * 7;
+        if (isStale) {
+          clearQuizProgress();
+          return;
+        }
+
+        Object.assign(a, {
+          state: payload.answers.state || "",
+          age: payload.answers.age || null,
+          gender: payload.answers.gender || "",
+          income: payload.answers.income || "",
+          categories: Array.isArray(payload.answers.categories) ? payload.answers.categories : []
+        });
+
+        s = Math.min(Math.max(parseInt(payload.step || 1, 10), 1), T);
+        syncUiFromAnswers();
+        $(".quiz-step").removeClass("active");
+        $("#step-" + s).addClass("active");
+        upProg(s);
+        $("#btn-bk").css("visibility", s > 1 ? "visible" : "hidden");
+        $("#btn-nx").html(s === T ? "Find My Schemes 🎯" : "Next Step →");
+        showToast("Resumed your saved quiz progress");
+      }
+
+      $(document).on("click", ".ob", function () {
+        const q = $(this).data("q");
+        const v = $(this).data("val");
+        if (q === "category") {
+          $(this).toggleClass("selected");
+          a.categories = [];
+          $("[data-q='category'].selected").each(function () {
+            a.categories.push($(this).data("val"));
+          });
+        } else {
+          $("[data-q='" + q + "']").removeClass("selected");
+          $(this).addClass("selected");
+          if (q === "gender") a.gender = v;
+          if (q === "income") a.income = v;
+        }
+        saveQuizProgress();
+      });
+
+      $("#q-state, #q-age").on("input change", function () {
+        a.state = $("#q-state").val() || "";
+        const ageValue = parseInt($("#q-age").val(), 10);
+        a.age = Number.isFinite(ageValue) ? ageValue : null;
+        saveQuizProgress();
+      });
+
+      function upProg(n) {
+        let i;
+        for (i = 1; i <= T; i++) {
+          const d = $("#dot-" + i);
+          d.removeClass("done active");
+          if (i < n) {
+            d.addClass("done").html("✓");
+          } else if (i === n) {
+            d.addClass("active").html(i);
+          } else {
+            d.html(i);
+          }
+          if (i < T) $("#line-" + i).toggleClass("done", i < n);
+        }
+        $("#pbar").css("width", (n / T) * 100 + "%");
+        $("#plabel").text("Step " + n + " of " + T);
+      }
+
+      function valid(n) {
+        $("#err-" + n).removeClass("show");
+        if (n === 1) {
+          if (!$("#q-state").val()) {
+            $("#err-1").addClass("show");
+            return false;
+          }
+          a.state = $("#q-state").val();
+        }
+        if (n === 2) {
+          const x = parseInt($("#q-age").val(), 10);
+          if (!x || x < 1 || x > 120) {
+            $("#err-2").addClass("show");
+            return false;
+          }
+          a.age = x;
+        }
+        if (n === 3 && !a.gender) {
+          $("#err-3").addClass("show");
+          return false;
+        }
+        if (n === 4 && !a.income) {
+          $("#err-4").addClass("show");
+          return false;
+        }
+        if (n === 5 && !a.categories.length) {
+          $("#err-5").addClass("show");
+          return false;
+        }
+        return true;
+      }
+
+      $("#btn-nx").on("click", function () {
+        if (!valid(s)) return;
+        if (s === T) {
+          doResults();
+          return;
+        }
+        $("#step-" + s).removeClass("active");
+        s += 1;
+        $("#step-" + s).addClass("active");
+        upProg(s);
+        $("#btn-bk").css("visibility", "visible");
+        $(this).html(s === T ? "Find My Schemes 🎯" : "Next Step →");
+        saveQuizProgress();
+      });
+
+      $("#btn-bk").on("click", function () {
+        $("#step-" + s).removeClass("active");
+        s -= 1;
+        $("#step-" + s).addClass("active");
+        upProg(s);
+        if (s === 1) $(this).css("visibility", "hidden");
+        $("#btn-nx").html("Next Step →");
+        saveQuizProgress();
+      });
+
+      function score(sch) {
+        function normalizeKey(value) {
+          return String(value || "")
+            .toLowerCase()
+            .replace(/&/g, " and ")
+            .replace(/[^a-z0-9]+/g, " ")
+            .trim();
+        }
+
+        function deriveSchemeCategories(scheme) {
+          const out = [];
+          const direct = Array.isArray(scheme.categories) ? scheme.categories : [];
+          direct.forEach(function (item) {
+            const key = normalizeKey(item);
+            if (key.indexOf("farm") >= 0) out.push("farmer");
+            if (key.indexOf("student") >= 0 || key.indexOf("education") >= 0 || key.indexOf("scholar") >= 0) out.push("student");
+            if (key.indexOf("women") >= 0 || key.indexOf("girl") >= 0) out.push("woman");
+            if (key.indexOf("msme") >= 0 || key.indexOf("entrepreneur") >= 0 || key.indexOf("business") >= 0) out.push("msme");
+            if (key.indexOf("senior") >= 0 || key.indexOf("pension") >= 0) out.push("senior_citizen");
+            if (key.indexOf("disabled") >= 0 || key.indexOf("differently") >= 0 || key.indexOf("divyang") >= 0) out.push("differently_abled");
+          });
+
+          const categoryText = normalizeKey(scheme.category || "");
+          if (categoryText.indexOf("farm") >= 0) out.push("farmer");
+          if (categoryText.indexOf("student") >= 0 || categoryText.indexOf("education") >= 0 || categoryText.indexOf("scholar") >= 0) out.push("student");
+          if (categoryText.indexOf("women") >= 0 || categoryText.indexOf("girl") >= 0) out.push("woman");
+          if (categoryText.indexOf("msme") >= 0 || categoryText.indexOf("entrepreneur") >= 0 || categoryText.indexOf("business") >= 0) out.push("msme");
+          if (categoryText.indexOf("senior") >= 0 || categoryText.indexOf("pension") >= 0) out.push("senior_citizen");
+          if (categoryText.indexOf("disabled") >= 0 || categoryText.indexOf("differently") >= 0 || categoryText.indexOf("divyang") >= 0) out.push("differently_abled");
+
+          return Array.from(new Set(out));
+        }
+
+        function incomeBandUpper(value) {
+          if (value === "below_1L") return 100000;
+          if (value === "1_3L") return 300000;
+          if (value === "3_8L") return 800000;
+          return 99999999;
+        }
+
+        const e = sch.eligibility || {};
+        const states = Array.isArray(e.states) ? e.states : ["all"];
+        const statePass = states.indexOf("all") >= 0 || states.indexOf(a.state) >= 0;
+        if (!statePass) return 0;
+
+        const minAge = Number.isFinite(e.minAge) ? e.minAge : 0;
+        const maxAge = Number.isFinite(e.maxAge) ? e.maxAge : 120;
+        const agePass = a.age >= minAge && a.age <= maxAge;
+        if (!agePass) return 0;
+
+        const schemeCats = deriveSchemeCategories(sch);
+        const categoryPass = !schemeCats.length || schemeCats.some(function (c) { return a.categories.includes(c); });
+        if (!categoryPass) return 0;
+
+        let sc = 44;
+
+        const gender = String(e.gender || "all").toLowerCase();
+        if (a.gender === "prefer_not" || gender === "all" || gender === a.gender) {
+          sc += 18;
+        }
+
+        const schemeIncomeCap = Number.isFinite(e.maxIncome) ? e.maxIncome : 99999999;
+        if (incomeBandUpper(a.income) <= schemeIncomeCap) {
+          sc += 18;
+        }
+
+        if (states.indexOf(a.state) >= 0 && states.indexOf("all") < 0) {
+          sc += 10;
+        }
+
+        if (schemeCats.length && schemeCats.some(function (c) { return a.categories.includes(c); })) {
+          sc += 10;
+        }
+
+        return Math.min(sc, 100);
+      }
+
+      function doResults() {
+        $("#quiz-sec,#prog-wrap").hide();
+        $("#results-sec").show();
+        const sv = readFavorites();
+        $.getJSON("../data/schemes.json")
+          .done(function (d) {
+            render(d.schemes || d, sv);
+          })
+          .fail(function () {
+            render(demo(), sv);
+          });
+      }
+
+      function render(list, sv) {
+        function normalizeKey(value) {
+          return String(value || "")
+            .toLowerCase()
+            .replace(/&/g, " and ")
+            .replace(/[^a-z0-9]+/g, " ")
+            .trim();
+        }
+
+        function deriveSchemeCategories(scheme) {
+          const out = [];
+          const categoryText = normalizeKey(scheme.category || "");
+          if (categoryText.indexOf("farm") >= 0) out.push("farmer");
+          if (categoryText.indexOf("student") >= 0 || categoryText.indexOf("education") >= 0 || categoryText.indexOf("scholar") >= 0) out.push("student");
+          if (categoryText.indexOf("women") >= 0 || categoryText.indexOf("girl") >= 0) out.push("woman");
+          if (categoryText.indexOf("msme") >= 0 || categoryText.indexOf("entrepreneur") >= 0 || categoryText.indexOf("business") >= 0) out.push("msme");
+          if (categoryText.indexOf("senior") >= 0 || categoryText.indexOf("pension") >= 0) out.push("senior_citizen");
+          if (categoryText.indexOf("disabled") >= 0 || categoryText.indexOf("differently") >= 0 || categoryText.indexOf("divyang") >= 0) out.push("differently_abled");
+          return Array.from(new Set(out));
+        }
+
+        function humanCategoryLabel(key) {
+          if (key === "farmer") return "Farmer";
+          if (key === "student") return "Student";
+          if (key === "woman") return "Women";
+          if (key === "msme") return "MSME";
+          if (key === "senior_citizen") return "Senior Citizen";
+          if (key === "differently_abled") return "Differently Abled";
+          return key;
+        }
+
+        const scored = list
+          .map(function (x) {
+            const y = Object.assign({}, x);
+            y.pct = score(x);
+            y.matchedCategories = deriveSchemeCategories(x);
+            return y;
+          })
+          .filter(function (x) {
+            return x.pct >= 40;
+          })
+          .sort(function (aItem, bItem) {
+            return bItem.pct - aItem.pct;
+          });
+        lastResults = scored.slice();
+
+        const im = {
+          below_1L: "Below Rs 1L",
+          "1_3L": "Rs 1L-Rs 3L",
+          "3_8L": "Rs 3L-Rs 8L",
+          above_8L: "Above Rs 8L"
+        };
+
+        $("#r-chips").html(
+          [
+            '<div class="rchip"><strong>' + a.state + '</strong>State</div>',
+            '<div class="rchip"><strong>' + a.age + ' yrs</strong>Age</div>',
+            '<div class="rchip"><strong>' + a.gender + '</strong>Gender</div>',
+            '<div class="rchip"><strong>' + (im[a.income] || a.income) + '</strong>Income</div>',
+            '<div class="rchip"><strong>' + scored.length + '</strong>Matches</div>',
+            '<div class="rchip"><strong>' + sv.length + '</strong>Saved Total</div>'
+          ].join("")
+        );
+
+        $("#r-sub").text("Found " + scored.length + " scheme" + (scored.length !== 1 ? "s" : "") + " matching your profile.");
+
+        if (!scored.length) {
+          $("#r-list").html('<div class="no-r"><div class="ni">🔍</div><h3>No close matches found</h3><p>Try broader answers or browse all schemes.</p></div>');
+          return;
+        }
+
+        $("#r-list").html(
+          scored
+            .map(function (x) {
+              const itemKey = String(x.id || x.name).toLowerCase();
+              const saved = sv.some(function (y) {
+                return String(y.id || y.name).toLowerCase() === itemKey;
+              });
+              const cl = x.pct >= 80 ? "mh" : x.pct >= 60 ? "mm" : "ml";
+              const tags = (x.matchedCategories || [])
+                .map(function (c) {
+                  return '<span class="stag">' + humanCategoryLabel(c) + "</span>";
+                })
+                .join("");
+              return (
+                '<div class="scc"><div class="scc-top"><div class="scc-name">' +
+                x.name +
+                '</div><span class="mpill ' +
+                cl +
+                '">' +
+                x.pct +
+                '% Match</span></div><div class="scc-desc">' +
+                (x.description || "Government financial assistance scheme.") +
+                '</div><div class="scc-tags">' +
+                tags +
+                '</div><button class="btn-sv' +
+                (saved ? " saved" : "") +
+                '" data-id="' +
+                x.id +
+                '">' +
+                (saved ? "✓ Saved" : "+ Save Scheme") +
+                "</button></div>"
+              );
+            })
+            .join("")
+        );
+
+        $(document)
+          .off("click", ".btn-sv")
+          .on("click", ".btn-sv", function () {
+            const id = $(this).data("id");
+            let s2 = readFavorites();
+            const item = scored.find(function (y) {
+              return y.id === id;
+            });
+            if (!item) return;
+
+            const itemKey = String(item.id || item.name).toLowerCase();
+            if (
+              s2.some(function (y) {
+                return String(y.id || y.name).toLowerCase() === itemKey;
+              })
+            ) {
+              s2 = s2.filter(function (y) {
+                return String(y.id || y.name).toLowerCase() !== itemKey;
+              });
+              $(this).removeClass("saved").text("+ Save Scheme");
+              showToast("Removed from saved schemes");
+            } else {
+              s2.unshift(normalizeFavoriteItem({
+                id: item.id || item.name,
+                name: item.name,
+                category: item.category || "General",
+                benefit: item.benefit || item.benefits || "Benefit details available",
+                description: item.description || "",
+                href: "schemes.html?scheme=" + encodeURIComponent(item.id || item.name || ""),
+                savedFrom: "quiz"
+              }));
+              $(this).addClass("saved").text("✓ Saved");
+              showToast("Saved to Home favorites");
+            }
+            writeFavorites(s2.slice(0, 30));
+          });
+
+        clearQuizProgress();
+      }
+
+      $("#btn-retake").on("click", function () {
+        Object.assign(a, { state: "", age: null, gender: "", income: "", categories: [] });
+        s = 1;
+        $(".ob").removeClass("selected");
+        $("#q-state").val("");
+        $("#q-age").val("");
+        $(".quiz-step").removeClass("active");
+        $("#step-1").addClass("active");
+        upProg(1);
+        $("#btn-bk").css("visibility", "hidden");
+        $("#btn-nx").html("Next Step →");
+        $("#results-sec").hide();
+        $("#quiz-sec,#prog-wrap").show();
+        $("html,body").animate({ scrollTop: 0 }, 300);
+        clearQuizProgress();
+        showToast("Quiz reset");
+      });
+
+      $("#btn-share").on("click", function () {
+        if (!lastResults.length) {
+          showToast("Run the quiz first to share results");
+          return;
+        }
+        const top = lastResults.slice(0, 3).map(function (x, idx) {
+          return (idx + 1) + ". " + x.name + " (" + x.pct + "% match)";
+        }).join("\n");
+        const summary = [
+          "My SchemeConnect Quiz Results",
+          "State: " + (a.state || "N/A"),
+          "Age: " + (a.age || "N/A"),
+          "Top Matches:",
+          top,
+          "Explore: " + window.location.href
+        ].join("\n");
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(summary).then(function () {
+            showToast("Results copied to clipboard");
+          }).catch(function () {
+            showToast("Could not copy. Please copy manually.");
+          });
+          return;
+        }
+
+        showToast("Clipboard not supported on this browser");
+      });
+
+      $("#clear-progress-btn").on("click", function () {
+        clearQuizProgress();
+        showToast("Saved progress cleared");
+      });
+
+      restoreQuizProgress();
+
+      function demo() {
+        return [
+          {
+            id: "pm-kisan",
+            name: "PM-KISAN",
+            description: "Rs 6,000/year direct income support for small & marginal farmers.",
+            state: "All India",
+            minAge: 18,
+            maxAge: 80,
+            gender: "all",
+            maxIncome: "3_8L",
+            categories: ["farmer"]
+          },
+          {
+            id: "pmmy",
+            name: "PM MUDRA Yojana",
+            description: "Collateral-free loans up to Rs 10 lakh for small businesses.",
+            state: "All India",
+            minAge: 18,
+            maxAge: 65,
+            gender: "all",
+            maxIncome: "3_8L",
+            categories: ["msme"]
+          },
+          {
+            id: "nsp",
+            name: "National Scholarship Portal",
+            description: "50+ scholarships for students from SC/ST/OBC/Minority/EWS.",
+            state: "All India",
+            minAge: 5,
+            maxAge: 30,
+            gender: "all",
+            maxIncome: "3_8L",
+            categories: ["student"]
+          },
+          {
+            id: "pmay",
+            name: "PM Awas Yojana",
+            description: "Housing subsidy for EWS/LIG beneficiaries under CLSS.",
+            state: "All India",
+            minAge: 18,
+            maxAge: 70,
+            gender: "all",
+            maxIncome: "3_8L",
+            categories: ["farmer", "msme", "student", "woman", "senior_citizen", "differently_abled"]
+          }
+        ];
+      }
+    });
+  </script>
+</body>
+</html>

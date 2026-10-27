@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | SchemeConnect</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/signin.css" />
+  <link rel="stylesheet" href="../css/enhancements.css" />
+</head>
+<body class="signin-page">
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <header id="main-header">
+    <div class="container nav-shell" id="nav-shell">
+      <a href="../index.html" class="brand">
+        <span class="brand-icon">&#127811;</span>
+        <span class="brand-name">SchemeConnect</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="../index.html">Home</a>
+        <a href="schemes.html">Schemes</a>
+        <a href="chat.html">AI Assistant</a>
+        <a href="quiz.html">Eligibility Quiz</a>
+        <a href="about.html">About</a>
+        <a class="sign-in active-link" href="signin.html">Sign In</a>
+      </nav>
+
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="schemes.html">Schemes</a>
+    <a href="chat.html">AI Assistant</a>
+    <a href="quiz.html">Eligibility Quiz</a>
+    <a href="about.html">About</a>
+    <a class="sign-in active-link" href="signin.html">Sign In</a>
+  </div>
+
+  <main class="auth-shell">
+    <section class="auth-card" id="auth-card">
+      <p class="eyebrow">Secure Access</p>
+      <h1>Welcome Back</h1>
+      <p class="sub">Sign in to save schemes, compare benefits, and get personalized recommendations.</p>
+
+      <form id="signin-form" class="auth-form">
+        <label>
+          Email Address
+          <input id="email" type="email" placeholder="you@example.com" required />
+        </label>
+
+        <label>
+          Password
+          <div class="password-wrap">
+            <input id="password" type="password" placeholder="Enter your password" required />
+            <button id="toggle-password" type="button" aria-label="Show password">Show</button>
+          </div>
+        </label>
+
+        <div class="meta-row">
+          <label class="remember">
+            <input type="checkbox" id="remember" />
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="text-link">Forgot password?</a>
+        </div>
+
+        <div class="strength-wrap">
+          <div class="strength-track"><span id="strength-fill"></span></div>
+          <p id="strength-text">Password strength: -</p>
+          <p id="caps-warning" class="caps-warning" hidden>Caps Lock appears to be on</p>
+        </div>
+
+        <div class="action-row">
+          <button type="button" id="demo-fill" class="ghost-btn">Use Demo</button>
+          <button type="submit" id="signin-btn" class="signin-btn">Sign In</button>
+        </div>
+      </form>
+
+      <div class="divider"><span>or continue with</span></div>
+
+      <div class="auth-bottom">
+        <button id="google-signin" class="google-btn" type="button" aria-label="Sign in with Google">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.5 3.9-5.5 3.9-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.9 1.5l2.7-2.6C16.9 3.2 14.7 2.2 12 2.2 6.7 2.2 2.4 6.5 2.4 11.8S6.7 21.4 12 21.4c6.9 0 9.1-4.8 9.1-7.3 0-.5 0-.8-.1-1.2H12z"/>
+            <path fill="#34A853" d="M3.3 7.7l3.2 2.3C7.3 8.4 9.5 6.9 12 6.9c1.9 0 3.1.8 3.9 1.5l2.7-2.6C16.9 3.2 14.7 2.2 12 2.2c-3.7 0-6.8 2.1-8.7 5.1z"/>
+            <path fill="#4A90E2" d="M12 21.4c2.6 0 4.8-.9 6.4-2.5l-3-2.5c-.8.6-1.9 1.1-3.4 1.1-3.9 0-5.3-2.6-5.5-3.9l-3.2 2.5c1.8 3 5 5.3 8.7 5.3z"/>
+            <path fill="#FBBC05" d="M6.5 11.6c0-.6.1-1.1.2-1.6L3.5 7.5C2.8 8.9 2.4 10.3 2.4 11.8c0 1.5.4 2.9 1.1 4.2l3.2-2.5c-.1-.5-.2-1.2-.2-1.9z"/>
+          </svg>
+          Continue with Google
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <span class="brand-icon">&#127811;</span>
+        <div>
+          <strong>SchemeConnect</strong>
+          <small>AI-Powered Government Discovery</small>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="official-portal.html">Official Portal</a>
+      </div>
+      <div class="footer-love">Made with &#10084; for India</div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&#169; 2026 SchemeConnect. All rights reserved.</span>
+      <span>Data sourced from official government portals</span>
+    </div>
+  </footer>
+
+  <div class="style-dock" id="style-dock">
+    <button class="style-chip active" data-theme="mint" type="button">Mint Glass</button>
+    <button class="style-chip" data-theme="aurora" type="button">Aurora Pop</button>
+    <button class="style-chip" data-theme="sunset" type="button">Sunset Glow</button>
+    <button class="style-chip" data-theme="ocean" type="button">Ocean Blue</button>
+    <button class="style-chip" data-theme="forest" type="button">Forest Green</button>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/page-theme.js"></script>
+  <script src="../js/enhancements.js"></script>
+  <script src="../js/signin.js"></script>
+  <script src="../js/premium-3d-stage.js"></script>
+</body>
+</html>
+

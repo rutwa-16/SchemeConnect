@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Schemes | SchemeConnect</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Shared Site Theme -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    
+    <!-- Bootstrap 5.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #1a7a4a;
+            --primary-dark: #0c5e37;
+            --bg: #d4ebe8;
+            --fg: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --panel: rgba(255, 255, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.58);
+            --glass-strong: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.68);
+            --shadow-soft: 0 12px 36px rgba(15, 23, 42, 0.1);
+            --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+            --radius-apple: 22px;
+            --text-light: #64748b;
+        }
+
+        /* Dark Mode Base */
+        :root.dark-mode,
+        body.dark-mode {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --bg: #0f172a;
+            --fg: #f1f5f9;
+            --muted: #cbd5e1;
+            --border: #1e293b;
+            --panel: rgba(15, 23, 42, 0.9);
+            --glass: rgba(15, 23, 42, 0.58);
+            --glass-strong: rgba(15, 23, 42, 0.72);
+            --glass-border: rgba(15, 23, 42, 0.68);
+            --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.3);
+            --text-light: #cbd5e1;
+        }
+
+        /* Light Aurora Theme */
+        body.theme-aurora {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --bg: #d7ecf6;
+        }
+
+        /* Light Sunset Theme */
+        body.theme-sunset {
+            --primary: #ff6b35;
+            --primary-dark: #ff4500;
+            --bg: #f8eadf;
+        }
+
+        /* Light Ocean Theme */
+        body.theme-ocean {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --bg: #d0e7f5;
+        }
+
+        /* Light Forest Theme */
+        body.theme-forest {
+            --primary: #047857;
+            --primary-dark: #065f46;
+            --bg: #daf3ea;
+        }
+
+        /* Dark Aurora Theme */
+        body.dark-mode.theme-aurora {
+            --primary: #00d9ff;
+            --primary-dark: #0099cc;
+            --bg: #0a0e27;
+        }
+
+        /* Dark Sunset Theme */
+        body.dark-mode.theme-sunset {
+            --primary: #ff6b35;
+            --primary-dark: #cc5500;
+            --bg: #1a0f0a;
+        }
+
+        /* Dark Ocean Theme */
+        body.dark-mode.theme-ocean {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --bg: #001a33;
+        }
+
+        /* Dark Forest Theme */
+        body.dark-mode.theme-forest {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --bg: #0a1f1a;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 8% 8%, rgba(16, 185, 129, 0.14), transparent 34%),
+                radial-gradient(circle at 88% 14%, rgba(59, 130, 246, 0.1), transparent 34%),
+                var(--bg);
+            color: var(--fg);
+        }
+
+        body.dark-mode {
+            background:
+                radial-gradient(circle at 8% 8%, rgba(16, 185, 129, 0.1), transparent 34%),
+                radial-gradient(circle at 88% 14%, rgba(59, 130, 246, 0.08), transparent 34%),
+                var(--bg);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255,255,255,0.7);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(255,255,255,0.72);
+            backdrop-filter: blur(14px);
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: rgba(100, 116, 139, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary) !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--fg) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        .nav-avatar-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(26, 122, 74, 0.22);
+            background: #ffffff;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .scheme-container {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            gap: 28px;
+            padding: 110px 0 40px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            flex: 0 0 280px;
+            background: rgba(255,255,255,0.68);
+            padding: 24px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.74);
+            box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+            backdrop-filter: blur(12px);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        body.dark-mode .sidebar {
+            background: rgba(30, 41, 59, 0.5);
+            border-color: rgba(100, 116, 139, 0.2);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+        }
+
+        .filter-section:first-child {
+            margin-top: 0;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--fg);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Search Bar */
+        .search-box {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 14px 10px 36px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #ffffff;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+            color: var(--fg);
+        }
+
+        body.dark-mode .search-box input {
+            background: rgba(15, 23, 42, 0.5);
+            border-color: rgba(100, 116, 139, 0.3);
+            color: var(--fg);
+        }
+
+        body.dark-mode .search-box input::placeholder {
+            color: rgba(241, 245, 249, 0.5);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 122, 74, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 10px;
+            color: var(--text-light);
+        }
+
+        /* Checkboxes and Selects */
+        .form-check {
+            margin-bottom: 10px;
+        }
+
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            margin-top: 3px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            accent-color: var(--primary);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .form-check-label {
+            margin-left: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--fg);
+        }
+
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #ffffff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fg);
+        }
+
+        body.dark-mode select {
+            background: rgba(15, 23, 42, 0.5);
+            border-color: rgba(100, 116, 139, 0.3);
+            color: #f1f5f9;
+        }
+
+        body.dark-mode select option {
+            background: #1a2332;
+            color: var(--fg);
+        }
+
+        select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 122, 74, 0.1);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            gap: 16px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .sort-filter {
+            min-width: 170px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.78);
+            background: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            color: var(--fg);
+        }
+
+        body.dark-mode .sort-filter {
+            background: rgba(15, 23, 42, 0.5);
+            border-color: rgba(100, 116, 139, 0.3);
+            color: var(--fg);
+        }
+
+        .insight-chip {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.78);
+            background: rgba(255,255,255,0.76);
+            color: var(--fg);
+            font-size: 0.82rem;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        body.dark-mode .insight-chip {
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(100, 116, 139, 0.2);
+            color: var(--fg);
+        }
+
+        .scheme-insights {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--fg);
+        }
+
+        .schemes-count {
+            background: var(--bg);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Scheme Cards Grid */
+        .schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .scheme-card {
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(255,255,255,0.76);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(8px);
+        }
+
+        body.dark-mode .scheme-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-color: rgba(100, 116, 139, 0.2);
+            color: #f1f5f9;
+        }
+
+        .scheme-card:hover {
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .summary-card {
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 14px;
+            padding: 12px 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .summary-card .label {
+            font-size: 0.76rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .summary-card .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--fg);
+        }
+
+        body.dark-mode .summary-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: rgba(100, 116, 139, 0.26);
+        }
+
+        .quick-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .quick-tag {
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.72);
+            color: var(--fg);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .quick-tag.active,
+        .quick-tag:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        body.dark-mode .quick-tag {
+            background: rgba(30, 41, 59, 0.62);
+            border-color: rgba(100, 116, 139, 0.26);
+        }
+
+        .view-toggle {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.78);
+            border-radius: 999px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .view-btn {
+            border: none;
+            background: transparent;
+            color: var(--fg);
+            border-radius: 999px;
+            padding: 6px 11px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s var(--ease-apple), box-shadow 0.25s var(--ease-apple), background-color 0.25s var(--ease-apple);
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 10px 22px rgba(26, 122, 74, 0.28);
+        }
+
+        body.dark-mode .view-toggle {
+            background: rgba(15, 23, 42, 0.62);
+            border-color: rgba(100, 116, 139, 0.26);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-reset-filters {
+            width: 42%;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.74));
+            color: var(--fg);
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 12px 10px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-apply-filters {
+            width: 58%;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02)),
+                linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(26, 122, 74, 0.28);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .btn-reset-filters {
+            background: rgba(15, 23, 42, 0.62);
+            border-color: rgba(100, 116, 139, 0.26);
+            color: var(--fg);
+        }
+
+        .schemes-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        body.dark-mode .scheme-card:hover {
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+        }
+
+        .scheme-badge {
+            display: inline-block;
+            background: var(--bg);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        body.dark-mode .scheme-badge {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .scheme-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .scheme-ministry {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .scheme-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #e67e22;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        /* Card Actions */
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-save, .btn-details {
+            flex: 1;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.25s var(--ease-apple), box-shadow 0.25s var(--ease-apple), border-color 0.25s var(--ease-apple), background-color 0.25s var(--ease-apple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-save {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.72));
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .btn-save:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-save.saved {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+        }
+
+        .btn-details {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
+                linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            box-shadow: 0 12px 24px rgba(26, 122, 74, 0.26);
+        }
+
+        .btn-details:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 28px rgba(26, 122, 74, 0.32);
+        }
+
+        .btn-save:hover,
+        .btn-save.saved:hover,
+        .btn-apply-filters:hover,
+        .btn-reset-filters:hover,
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.16);
+        }
+
+        .btn-save::before,
+        .btn-details::before,
+        .btn-apply-filters::before,
+        .btn-reset-filters::before,
+        .view-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 24%, rgba(255, 255, 255, 0.32) 50%, transparent 78%);
+            transform: translateX(-130%);
+            transition: transform 0.62s var(--ease-apple);
+            pointer-events: none;
+        }
+
+        .btn-save:hover::before,
+        .btn-details:hover::before,
+        .btn-apply-filters:hover::before,
+        .btn-reset-filters:hover::before,
+        .view-btn:hover::before {
+            transform: translateX(130%);
+        }
+
+        /* Modal */
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--border);
+            padding: 24px;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--fg);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 140px;
+            font-size: 0.95rem;
+        }
+
+        .info-value {
+            color: var(--fg);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .doc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .doc-list li {
+            padding: 8px 0;
+            color: var(--fg);
+            font-size: 0.9rem;
+        }
+
+        .doc-list li:before {
+            content: "✓ ";
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .btn-apply {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-apply:hover {
+            background: var(--primary-dark);
+            color: #ffffff;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--border);
+            margin-bottom: 16px;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255,255,255,0.7);
+            border-top: 1px solid rgba(255,255,255,0.75);
+            padding: 32px 0 24px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-section h4 {
+            font-weight: 700;
+            color: var(--fg);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Apple-style polish */
+        body {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            animation: pageSoftIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes pageSoftIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scheme-card,
+        .sidebar,
+        .sort-filter,
+        .btn-save,
+        .btn-details,
+        .btn-apply,
+        .btn-apply-filters {
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .btn-apply-filters:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(26, 122, 74, 0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .scheme-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .sidebar {
+                flex: 1;
+                position: static;
+            }
+
+            .schemes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .header-controls {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .info-row {
+                flex-direction: column;
+            }
+
+            .info-label {
+                margin-bottom: 8px;
+                min-width: auto;
+            }
+
+            .filter-actions {
+                flex-direction: column;
+            }
+
+            .btn-reset-filters,
+            .btn-apply-filters {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="container nav-shell" id="nav-shell">
+            <a href="../index.html" class="brand">
+                <span class="brand-icon">&#127811;</span>
+                <span class="brand-name">SchemeConnect</span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="../index.html">Home</a>
+                <a class="active-link" href="schemes.html">Schemes</a>
+                <a href="chat.html">AI Assistant</a>
+                <a href="quiz.html">Eligibility Quiz</a>
+                <a href="about.html">About</a>
+                <a class="sign-in" href="signin.html">Sign In</a>
+            </nav>
+
+            <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="../index.html">Home</a>
+        <a class="active-link" href="schemes.html">Schemes</a>
+        <a href="chat.html">AI Assistant</a>
+        <a href="quiz.html">Eligibility Quiz</a>
+        <a href="about.html">About</a>
+        <a class="sign-in" href="signin.html">Sign In</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-lg">
+        <div class="scheme-container">
+            <!-- Sidebar Filters -->
+            <aside class="sidebar">
+                <h5 style="font-weight: 700; margin-bottom: 20px; color: var(--fg);">Filters</h5>
+
+                <!-- Search Bar -->
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search schemes...">
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-section">
+                    <label class="filter-label">Category</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="Farmers & Agriculture">Farmers & Agriculture</option>
+                        <option value="Women & Girl Child">Women & Girl Child</option>
+                        <option value="Students & Education">Students & Education</option>
+                        <option value="MSME & Entrepreneurship">MSME & Entrepreneurship</option>
+                        <option value="Senior Citizens">Senior Citizens</option>
+                        <option value="Health & Insurance">Health & Insurance</option>
+                        <option value="Housing & Shelter">Housing & Shelter</option>
+                        <option value="Differently Abled">Differently Abled</option>
+                        <option value="SC/ST & Minorities">SC/ST & Minorities</option>
+                        <option value="Youth & Employment">Youth & Employment</option>
+                    </select>
+                </div>
+
+                <!-- Gender Filter -->
+                <div class="filter-section">
+                    <label class="filter-label">Gender</label>
+                    <div class="form-check">
+                        <input class="form-check-input gender-check" type="checkbox" id="genderAll" value="all" checked>
+                        <label class="form-check-label" for="genderAll">All</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input gender-check" type="checkbox" id="genderMale" value="male">
+                        <label class="form-check-label" for="genderMale">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input gender-check" type="checkbox" id="genderFemale" value="female">
+                        <label class="form-check-label" for="genderFemale">Female</label>
+                    </div>
+                </div>
+
+                <!-- Age Group Filter -->
+                <div class="filter-section">
+                    <label class="filter-label">Age Group</label>
+                    <select id="ageGroupFilter">
+                        <option value="">All Ages</option>
+                        <option value="0-18">0-18 Years</option>
+                        <option value="18-35">18-35 Years</option>
+                        <option value="35-60">35-60 Years</option>
+                        <option value="60+">60+ Years</option>
+                    </select>
+                </div>
+
+                <!-- Income Range Filter -->
+                <div class="filter-section">
+                    <label class="filter-label">Annual Income</label>
+                    <select id="incomeFilter">
+                        <option value="">All Income Levels</option>
+                        <option value="0-100000">Below ₹1 Lakh</option>
+                        <option value="100000-300000">₹1 - ₹3 Lakh</option>
+                        <option value="300000-600000">₹3 - ₹6 Lakh</option>
+                        <option value="600000+">Above ₹6 Lakh</option>
+                    </select>
+                </div>
+
+                <!-- State Filter -->
+                <div class="filter-section">
+                    <label class="filter-label">State</label>
+                    <select id="stateFilter">
+                        <option value="">All States</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button id="resetFiltersBtn" class="btn-reset-filters" type="button">Reset</button>
+                    <button id="applyFiltersBtn" class="btn-apply-filters" type="button">✓ Apply Filters</button>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <div class="section-header">
+                    <h1 class="section-title">Discover Schemes</h1>
+                    <div class="header-controls">
+                        <div class="schemes-count"><span id="schemeCount">0</span> schemes found</div>
+                        <select id="sortFilter" class="sort-filter">
+                            <option value="featured">Sort: Featured</option>
+                            <option value="name-asc">Name: A to Z</option>
+                            <option value="benefit">Benefit Priority</option>
+                            <option value="random">Random</option>
+                        </select>
+                        <div class="view-toggle" role="group" aria-label="Result view mode">
+                            <button id="viewGridBtn" class="view-btn active" type="button">Grid</button>
+                            <button id="viewListBtn" class="view-btn" type="button">List</button>
+                        </div>
+                        <button id="randomPickBtn" class="btn-details" type="button">
+                            <i class="fas fa-dice"></i> Random Pick
+                        </button>
+                    </div>
+                </div>
+
+                <div id="summaryCards" class="summary-cards"></div>
+                <div id="schemeInsights" class="scheme-insights"></div>
+                <div id="quickTags" class="quick-tags"></div>
+
+                <!-- Schemes Grid -->
+                <div id="schemesContainer" class="schemes-grid">
+                    <div class="empty-state">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading schemes...</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scheme Details Modal -->
+    <div class="modal fade" id="schemeModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSchemeName"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalSchemeDetails">
+                    <!-- Details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a id="modalApplyBtn" class="btn-apply" href="#" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Apply Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-line"></div>
+        <div class="container footer-main">
+            <div class="footer-brand">
+                <span class="brand-icon">&#127811;</span>
+                <div>
+                    <strong>SchemeConnect</strong>
+                    <small>AI-Powered Government Discovery</small>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="official-portal.html">Official Portal</a>
+            </div>
+            <div class="footer-love">Made with &#10084; for India</div>
+        </div>
+        <div class="container footer-bottom">
+            <span>&#169; 2026 SchemeConnect. All rights reserved.</span>
+            <span>Data sourced from official government portals</span>
+        </div>
+    </footer>
+
+    <div class="style-dock" id="style-dock">
+        <button class="style-chip active" data-theme="mint" type="button">Mint Glass</button>
+        <button class="style-chip" data-theme="aurora" type="button">Aurora Pop</button>
+        <button class="style-chip" data-theme="sunset" type="button">Sunset Glow</button>
+        <button class="style-chip" data-theme="ocean" type="button">Ocean Blue</button>
+        <button class="style-chip" data-theme="forest" type="button">Forest Green</button>
+    </div>
+
+    <!-- jQuery 3.7 CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Bootstrap 5.3 Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../data/schemes.js"></script>
+    <script src="../js/custom-schemes.js"></script>
+
+    <!-- SchemeConnect Script -->
+    <script>
+        // Global variables
+        let allSchemes = [];
+        let filteredSchemes = [];
+        let pendingSchemeId = null;
+        let currentView = localStorage.getItem('schemeconnect:schemes-view') || 'grid';
+        let schemeModal = null;
+
+        function mergeWithCustomSchemes(list) {
+            const base = Array.isArray(list) ? list : [];
+            if (!window.SchemeConnectCustomSchemes || typeof window.SchemeConnectCustomSchemes.mergeWith !== 'function') {
+                return base;
+            }
+            return window.SchemeConnectCustomSchemes.mergeWith(base);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Bootstrap modal safely (Bootstrap CDN might not have loaded)
+            try {
+                schemeModal = new bootstrap.Modal(document.getElementById('schemeModal'));
+            } catch (e) {
+                console.warn('Bootstrap modal init failed:', e);
+            }
+            initHeaderBehavior();
+            loadSchemes();
+            attachEventListeners();
+            loadSavedSchemes();
+            syncViewFromPreferences();
+            const params = new URLSearchParams(window.location.search);
+            pendingSchemeId = params.get('scheme');
+
+            document.addEventListener('schemeconnect:preferences-updated', function (event) {
+                const detail = event && event.detail ? event.detail : {};
+                if (detail.defaultView === 'list' || detail.defaultView === 'grid') {
+                    currentView = detail.defaultView;
+                } else {
+                    syncViewFromPreferences();
+                }
+                setViewMode(currentView);
+            });
+
+            window.addEventListener('storage', function (event) {
+                if (event.key !== 'schemeconnect:schemes-view') return;
+                syncViewFromPreferences();
+                setViewMode(currentView);
+            });
+
+            document.addEventListener('schemeconnect:custom-schemes-updated', function () {
+                loadSchemes();
+            });
+
+            window.addEventListener('storage', function (event) {
+                if (event.key !== 'schemeconnect:custom-schemes') return;
+                loadSchemes();
+            });
+        });
+
+        function syncViewFromPreferences() {
+            const fromStorage = localStorage.getItem('schemeconnect:schemes-view') || 'grid';
+            currentView = fromStorage === 'list' ? 'list' : 'grid';
+        }
+
+        function initHeaderBehavior() {
+            const header = document.getElementById('main-header');
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!header || !mobileToggle || !mobileMenu) return;
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                mobileToggle.innerHTML = '&#9776;';
+            }
+
+            function onScroll() {
+                header.classList.toggle('scrolled', window.scrollY > 24);
+            }
+
+            mobileToggle.addEventListener('click', function(event) {
+                event.stopPropagation();
+                mobileMenu.classList.toggle('open');
+                mobileToggle.innerHTML = mobileMenu.classList.contains('open') ? '&#10005;' : '&#9776;';
+            });
+
+            Array.from(mobileMenu.querySelectorAll('a')).forEach(function (link) {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!mobileMenu.contains(event.target) && event.target !== mobileToggle) {
+                    closeMobileMenu();
+                }
+            });
+
+            onScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
+        }
+
+        // Load schemes
+        async function loadSchemes() {
+            try {
+                let data = [];
+                
+                // Try fetch first (works on local server), fall back to window.SCHEMES_DATA
+                try {
+                    const response = await fetch('../data/schemes.json');
+                    if (response.ok) {
+                        data = await response.json();
+                    } else {
+                        data = window.SCHEMES_DATA || [];
+                    }
+                } catch (fetchErr) {
+                    // fetch failed (file:// protocol), use preloaded data
+                    data = window.SCHEMES_DATA || [];
+                }
+                
+                allSchemes = mergeWithCustomSchemes(data);
+                filteredSchemes = [...allSchemes];
+                renderSchemes();
+                if (pendingSchemeId) {
+                    showSchemeDetails(pendingSchemeId);
+                    pendingSchemeId = null;
+                }
+                
+                // Dispatch schemes-ready for radar widget and other listeners
+                document.dispatchEvent(new CustomEvent('schemes-ready', { detail: allSchemes }));
+            } catch (error) {
+                console.error('Error loading schemes:', error);
+                document.getElementById('schemesContainer').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Failed to load schemes. Please refresh the page.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Attach event listeners
+        function attachEventListeners() {
+            // Apply Filters button
+            const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+            if (applyFiltersBtn) {
+                applyFiltersBtn.addEventListener('click', applyFilters);
+            }
+
+            const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+            if (resetFiltersBtn) {
+                resetFiltersBtn.addEventListener('click', resetFilters);
+            }
+
+            const sortFilter = document.getElementById('sortFilter');
+            if (sortFilter) {
+                sortFilter.addEventListener('change', applyFilters);
+            }
+
+            ['categoryFilter', 'ageGroupFilter', 'incomeFilter', 'stateFilter'].forEach(function(id) {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('change', applyFilters);
+            });
+
+            document.querySelectorAll('.gender-check').forEach(function(el) {
+                el.addEventListener('change', function() {
+                    if (el.id === 'genderAll' && el.checked) {
+                        document.querySelectorAll('.gender-check').forEach(function(box) {
+                            if (box.id !== 'genderAll') box.checked = false;
+                        });
+                    }
+                    if (el.id !== 'genderAll' && el.checked) {
+                        const all = document.getElementById('genderAll');
+                        if (all) all.checked = false;
+                    }
+                    applyFilters();
+                });
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                let t = null;
+                searchInput.addEventListener('input', function() {
+                    window.clearTimeout(t);
+                    t = window.setTimeout(applyFilters, 180);
+                });
+            }
+
+            const viewGridBtn = document.getElementById('viewGridBtn');
+            const viewListBtn = document.getElementById('viewListBtn');
+            if (viewGridBtn) viewGridBtn.addEventListener('click', function() { setViewMode('grid'); });
+            if (viewListBtn) viewListBtn.addEventListener('click', function() { setViewMode('list'); });
+
+            const quickTags = document.getElementById('quickTags');
+            if (quickTags) {
+                quickTags.addEventListener('click', function(event) {
+                    const tag = event.target.closest('.quick-tag');
+                    if (!tag) return;
+                    const nextCategory = tag.getAttribute('data-category') || '';
+                    const categoryFilter = document.getElementById('categoryFilter');
+                    if (categoryFilter) categoryFilter.value = nextCategory;
+                    applyFilters();
+                });
+            }
+
+            // Random pick button
+            document.getElementById('randomPickBtn').addEventListener('click', pickRandomScheme);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('ageGroupFilter').value = '';
+            document.getElementById('incomeFilter').value = '';
+            document.getElementById('stateFilter').value = '';
+            document.getElementById('sortFilter').value = 'featured';
+
+            const genderAll = document.getElementById('genderAll');
+            const genderMale = document.getElementById('genderMale');
+            const genderFemale = document.getElementById('genderFemale');
+            if (genderAll) genderAll.checked = true;
+            if (genderMale) genderMale.checked = false;
+            if (genderFemale) genderFemale.checked = false;
+
+            applyFilters();
+        }
+
+        function shuffleList(items) {
+            const copy = [...items];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = copy[i];
+                copy[i] = copy[j];
+                copy[j] = temp;
+            }
+            return copy;
+        }
+
+        // Apply all filters
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const selectedGenders = Array.from(document.querySelectorAll('.gender-check:checked')).map(el => el.value);
+            const ageGroup = document.getElementById('ageGroupFilter').value;
+            const incomeRange = document.getElementById('incomeFilter').value;
+            const state = document.getElementById('stateFilter').value;
+            const sortBy = document.getElementById('sortFilter').value;
+
+            filteredSchemes = allSchemes.filter(scheme => {
+                const schemeDescription = (scheme.description || '').toLowerCase();
+                const schemeName = (scheme.name || '').toLowerCase();
+
+                // Search filter
+                if (searchTerm && !schemeName.includes(searchTerm) && 
+                    !schemeDescription.includes(searchTerm)) {
+                    return false;
+                }
+
+                // Category filter
+                if (category && scheme.category !== category) {
+                    return false;
+                }
+
+                // Gender filter
+                const gender = (scheme.eligibility && scheme.eligibility.gender) || 'all';
+                if (selectedGenders.length > 0 && selectedGenders.includes('all')) {
+                    // All is checked, include all
+                } else if (selectedGenders.length > 0) {
+                    if (!selectedGenders.includes(gender) && gender !== 'all') {
+                        return false;
+                    }
+                }
+
+                // Age group filter
+                if (ageGroup) {
+                    const [minAge, maxAge] = getAgeRange(ageGroup);
+                    const schemeMinAge = (scheme.eligibility && scheme.eligibility.minAge) || 0;
+                    const schemeMaxAge = (scheme.eligibility && scheme.eligibility.maxAge) || 99;
+                    if (!(schemeMinAge <= maxAge && schemeMaxAge >= minAge)) {
+                        return false;
+                    }
+                }
+
+                // Income range filter
+                if (incomeRange) {
+                    const [minIncome, maxIncome] = getIncomeRange(incomeRange);
+                    const schemeMaxIncome = (scheme.eligibility && scheme.eligibility.maxIncome) || 999999999;
+                    if (schemeMaxIncome < minIncome) {
+                        return false;
+                    }
+                }
+
+                // State filter
+                const schemeStates = (scheme.eligibility && scheme.eligibility.states) || ['all'];
+                if (state && !schemeStates.includes('all') && !schemeStates.includes(state)) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            if (sortBy === 'name-asc') {
+                filteredSchemes.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+            } else if (sortBy === 'benefit') {
+                filteredSchemes.sort((a, b) => String(b.benefits || b.benefit || '').length - String(a.benefits || a.benefit || '').length);
+            } else if (sortBy === 'random') {
+                filteredSchemes = shuffleList(filteredSchemes);
+            } else {
+                filteredSchemes.sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+            }
+
+            renderSchemes();
+        }
+
+        function renderInsights() {
+            const insights = document.getElementById('schemeInsights');
+            if (!insights) return;
+
+            const featured = filteredSchemes.filter(s => s.featured).length;
+            const categories = new Set(filteredSchemes.map(s => s.category)).size;
+            const docsRich = filteredSchemes.filter(s => Array.isArray(s.documents) && s.documents.length >= 3).length;
+
+            insights.innerHTML = `
+                <span class="insight-chip"><i class="fas fa-layer-group"></i> Categories: ${categories}</span>
+                <span class="insight-chip"><i class="fas fa-star"></i> Featured: ${featured}</span>
+                <span class="insight-chip"><i class="fas fa-file-alt"></i> Detailed Docs: ${docsRich}</span>
+            `;
+
+            renderSummaryCards(featured, categories);
+            renderQuickTags();
+        }
+
+        function renderSummaryCards(featured, categories) {
+            const target = document.getElementById('summaryCards');
+            if (!target) return;
+            const savedCount = readSharedFavorites().length;
+            target.innerHTML = `
+                <div class="summary-card"><div class="label">Visible Schemes</div><div class="value">${filteredSchemes.length}</div></div>
+                <div class="summary-card"><div class="label">Featured</div><div class="value">${featured}</div></div>
+                <div class="summary-card"><div class="label">Categories</div><div class="value">${categories}</div></div>
+                <div class="summary-card"><div class="label">Saved</div><div class="value">${savedCount}</div></div>
+            `;
+        }
+
+        function renderQuickTags() {
+            const target = document.getElementById('quickTags');
+            if (!target) return;
+
+            const freq = {};
+            filteredSchemes.forEach(function(s) {
+                const key = s.category || 'Other';
+                freq[key] = (freq[key] || 0) + 1;
+            });
+
+            const top = Object.keys(freq)
+                .sort(function(a, b) { return freq[b] - freq[a]; })
+                .slice(0, 5);
+
+            const current = document.getElementById('categoryFilter').value;
+            target.innerHTML = ['<button class="quick-tag ' + (current === '' ? 'active' : '') + '" data-category="" type="button">All</button>']
+                .concat(top.map(function(category) {
+                    const active = current === category ? 'active' : '';
+                    return '<button class="quick-tag ' + active + '" data-category="' + category + '" type="button">' + category + ' (' + freq[category] + ')</button>';
+                }))
+                .join('');
+        }
+
+        function setViewMode(mode) {
+            currentView = mode === 'list' ? 'list' : 'grid';
+            localStorage.setItem('schemeconnect:schemes-view', currentView);
+
+            const container = document.getElementById('schemesContainer');
+            if (container) {
+                container.classList.toggle('list-view', currentView === 'list');
+            }
+
+            const viewGridBtn = document.getElementById('viewGridBtn');
+            const viewListBtn = document.getElementById('viewListBtn');
+            if (viewGridBtn) viewGridBtn.classList.toggle('active', currentView === 'grid');
+            if (viewListBtn) viewListBtn.classList.toggle('active', currentView === 'list');
+        }
+
+        function pickRandomScheme() {
+            if (!filteredSchemes.length) return;
+            const random = filteredSchemes[Math.floor(Math.random() * filteredSchemes.length)];
+            showSchemeDetails(random.id);
+        }
+
+        // Helper function to get age range
+        function getAgeRange(ageGroup) {
+            const ranges = {
+                '0-18': [0, 18],
+                '18-35': [18, 35],
+                '35-60': [35, 60],
+                '60+': [60, 99]
+            };
+            return ranges[ageGroup] || [0, 99];
+        }
+
+        // Helper function to get income range
+        function getIncomeRange(incomeRange) {
+            const ranges = {
+                '0-100000': [0, 100000],
+                '100000-300000': [100000, 300000],
+                '300000-600000': [300000, 600000],
+                '600000+': [600000, 999999999]
+            };
+            return ranges[incomeRange] || [0, 999999999];
+        }
+
+        // Render schemes
+        function renderSchemes() {
+            const container = document.getElementById('schemesContainer');
+            document.getElementById('schemeCount').textContent = filteredSchemes.length;
+            renderInsights();
+
+            if (filteredSchemes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fas fa-search"></i>
+                        <p>No schemes found matching your criteria</p>
+                        <small>Try adjusting your filters</small>
+                    </div>
+                `;
+                setViewMode(currentView);
+                return;
+            }
+
+            container.innerHTML = filteredSchemes.map(scheme => {
+                const isSaved = isSchemeeSaved(scheme.id);
+                return `
+                    <div class="scheme-card">
+                        ${scheme.featured ? '<div class="featured-badge"><i class="fas fa-star"></i> Featured</div>' : ''}
+                        <div class="scheme-badge">${scheme.category}</div>
+                        <h3 class="scheme-name">${scheme.name}</h3>
+                        <p class="scheme-ministry"><i class="fas fa-building"></i> ${scheme.ministry}</p>
+                        <p class="scheme-description">${scheme.description || 'No description available.'}</p>
+                        <div class="card-actions">
+                            <button class="btn-save ${isSaved ? 'saved' : ''}" 
+                                    onclick="toggleSaveScheme('${scheme.id}', this)">
+                                <i class="fas fa-bookmark"></i> ${isSaved ? 'Saved' : 'Save'}
+                            </button>
+                            <button class="btn-details" onclick="showSchemeDetails('${scheme.id}')">
+                                <i class="fas fa-arrow-right"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            setViewMode(currentView);
+        }
+
+        // Show scheme details in modal
+        function showSchemeDetails(schemeId) {
+            const key = String(schemeId || '').trim().toLowerCase();
+            const scheme = allSchemes.find(function (s) {
+                const idMatch = String(s.id || '').trim().toLowerCase() === key;
+                const nameMatch = String(s.name || '').trim().toLowerCase() === key;
+                return idMatch || nameMatch;
+            });
+            if (!scheme) return;
+
+            document.getElementById('modalSchemeName').textContent = scheme.name;
+            document.getElementById('modalApplyBtn').href = scheme.applyLink || '#';
+
+            const documents = Array.isArray(scheme.documents) ? scheme.documents : [];
+            const eligibility = scheme.eligibility || {};
+            const states = Array.isArray(eligibility.states) ? eligibility.states : ['all'];
+            const maxIncome = Number.isFinite(eligibility.maxIncome) ? eligibility.maxIncome : 0;
+
+            const detailsHtml = `
+                <div class="info-row">
+                    <div class="info-label">Category</div>
+                    <div class="info-value">${scheme.category}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Ministry</div>
+                    <div class="info-value">${scheme.ministry}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Description</div>
+                    <div class="info-value">${scheme.description}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Benefits</div>
+                    <div class="info-value">${scheme.benefits || scheme.benefit || 'Benefit details available on official portal.'}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">How to Apply</div>
+                    <div class="info-value">${scheme.howToApply || 'Use the official portal link to apply.'}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Documents Required</div>
+                    <div class="info-value">
+                        <ul class="doc-list">
+                            ${(documents.length ? documents : ['Refer official scheme page for full checklist']).map(doc => `<li>${doc}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Eligibility</div>
+                    <div class="info-value">
+                        <strong>Gender:</strong> ${eligibility.gender || 'All'}<br>
+                        <strong>Age:</strong> ${eligibility.minAge ?? 0} - ${eligibility.maxAge ?? 99} years<br>
+                        <strong>Max Income:</strong> ₹${maxIncome.toLocaleString()}<br>
+                        <strong>States:</strong> ${states.includes('all') ? 'All India' : states.join(', ')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modalSchemeDetails').innerHTML = detailsHtml;
+            if (schemeModal) {
+                schemeModal.show();
+            } else {
+                // Fallback: try to re-initialize and show
+                try {
+                    schemeModal = new bootstrap.Modal(document.getElementById('schemeModal'));
+                    schemeModal.show();
+                } catch(e) {}
+            }
+        }
+
+        // Save/Unsave scheme
+        function toggleSaveScheme(schemeId, button) {
+            const scheme = allSchemes.find(function(item) {
+                return String(item.id || '').trim().toLowerCase() === String(schemeId || '').trim().toLowerCase();
+            });
+            if (!scheme) return;
+
+            let savedSchemes = readSharedFavorites();
+            const key = String(scheme.id || scheme.name || '').toLowerCase();
+            const exists = savedSchemes.some(function(item) {
+                return String(item.id || item.name || '').toLowerCase() === key;
+            });
+
+            if (exists) {
+                savedSchemes = savedSchemes.filter(function(item) {
+                    return String(item.id || item.name || '').toLowerCase() !== key;
+                });
+                button.classList.remove('saved');
+                button.innerHTML = '<i class="fas fa-bookmark"></i> Save';
+            } else {
+                savedSchemes.unshift({
+                    id: scheme.id || scheme.name,
+                    name: scheme.name || 'Unnamed Scheme',
+                    category: scheme.category || 'General',
+                    benefit: scheme.benefits || scheme.benefit || 'Benefit details available',
+                    description: scheme.description || '',
+                    href: 'schemes.html?scheme=' + encodeURIComponent(scheme.id || scheme.name || ''),
+                    savedFrom: 'schemes'
+                });
+                button.classList.add('saved');
+                button.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
+            }
+
+            writeSharedFavorites(savedSchemes.slice(0, 30));
+            renderInsights();
+        }
+
+        // Check if scheme is saved
+        function isSchemeeSaved(schemeId) {
+            const key = String(schemeId || '').trim().toLowerCase();
+            return readSharedFavorites().some(function(item) {
+                return String(item.id || item.name || '').trim().toLowerCase() === key;
+            });
+        }
+
+        function readSharedFavorites() {
+            let shared = [];
+            let legacy = [];
+            try {
+                shared = JSON.parse(localStorage.getItem('schemeconnect:favorites') || '[]');
+            } catch (e) {
+                shared = [];
+            }
+            try {
+                legacy = JSON.parse(localStorage.getItem('sc_saved_schemes') || '[]');
+            } catch (e) {
+                legacy = [];
+            }
+
+            const map = new Map();
+            [].concat(shared, legacy).forEach(function(item) {
+                if (!item) return;
+                if (typeof item === 'string') {
+                    item = { id: item, name: item, category: 'General', benefit: 'Benefit details available' };
+                }
+                const key = String(item.id || item.name || '').trim().toLowerCase();
+                if (!key) return;
+                if (!map.has(key)) {
+                    map.set(key, {
+                        id: item.id || item.name,
+                        name: item.name || item.id,
+                        category: item.category || 'General',
+                        benefit: item.benefit || item.benefits || 'Benefit details available',
+                        description: item.description || '',
+                        href: item.href || ('schemes.html?scheme=' + encodeURIComponent(item.id || item.name || '')),
+                        savedFrom: item.savedFrom || 'schemes'
+                    });
+                }
+            });
+
+            const out = Array.from(map.values()).slice(0, 30);
+            localStorage.setItem('schemeconnect:favorites', JSON.stringify(out));
+            if (legacy.length) localStorage.removeItem('sc_saved_schemes');
+            return out;
+        }
+
+        function writeSharedFavorites(list) {
+            localStorage.setItem('schemeconnect:favorites', JSON.stringify(list));
+            localStorage.removeItem('sc_saved_schemes');
+            document.dispatchEvent(new CustomEvent('schemeconnect:favorites-updated', { detail: list.slice() }));
+        }
+
+        // Load saved schemes state on render
+        function loadSavedSchemes() {
+            readSharedFavorites();
+            window.addEventListener('storage', function(event) {
+                if (event.key !== 'schemeconnect:favorites') return;
+                renderSchemes();
+            });
+            document.addEventListener('schemeconnect:favorites-updated', function() {
+                renderSchemes();
+            });
+        }
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/premium-3d-stage.js"></script>
+</body>
+</html>
+
